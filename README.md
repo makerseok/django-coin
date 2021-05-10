@@ -1,0 +1,2 @@
+# django-coin
+django project
