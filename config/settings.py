@@ -29,8 +29,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.humanize',
     'coin.apps.CoinConfig',
     'common.apps.CommonConfig',
+    'twitter.apps.TwitterConfig',
+    'article.apps.ArticleConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

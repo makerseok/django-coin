@@ -4,13 +4,8 @@ register = template.Library()
 
 
 @register.filter
-def tuple0(value):
-    return value[0]
-
-
-@register.filter
-def tuple1(value):
-    return value[1]
+def get_tuple_value(value,arg):
+    return value[arg]
 
 
 @register.filter

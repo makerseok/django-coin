@@ -3,7 +3,8 @@ from django.db import models
 
 class CoinData(models.Model):
     from . import ftns
-    coin_name = models.CharField(max_length=20, choices=ftns.namelist())  #
+    coin_name = models.CharField(max_length=20, choices=ftns.namelist())
+    coin_name_english = models.CharField(max_length=20, choices=ftns.namelist_eng())
     market = models.CharField(max_length=20)  # ticker
     high_price = models.FloatField()
     low_price = models.FloatField()

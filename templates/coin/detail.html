@@ -1,13 +1,15 @@
 {% load filters %}
-<p class="align-self-center border-bottom mt-3">
-    <strong>{{ target_coin.get_coin_name_display }}</strong>
-    <small>({{ target_coin.market }})</small>
-</p>
+{% load humanize %}
 
-<div style="height: 120px;" class="row">
+<div style="height:50px; line-height:50px;" class="text-white bg-secondary border rounded-top pl-2">
+    <strong>{{ target_coin.get_coin_name_english_display }}</strong>
+    <small class="target">({{ target_coin.market }})</small>
+</div>
+
+<div style="height: 120px;" class="row border m-0">
     <div class="col-sm-4 align-self-center text-right prices">
-        <h3 class="mr-5 mb-0">{{ target_coin.trade_price }}<small>{{ target_coin.market|split:0 }}</small></h3>
-        <p class="mt-0 d-inline change_price">{{ target_coin.signed_change_price }}</p>
+        <h3 class="mr-5 mb-0">{{ target_coin.trade_price|intcomma }}<small>{{ target_coin.market|split:0 }}</small></h3>
+        <p class="mt-0 d-inline change_price">{{ target_coin.signed_change_price|intcomma }}</p>
         <p class="mr-5 mt-0 d-inline">{{ target_coin.signed_change_rate }}%</p>
     </div>
     <div class="col-sm-1 align-self-center p-0">
@@ -19,16 +21,16 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-3 align-self-center">
+    <div class="col-sm-2 align-self-center p-0">
         <div class="row text-right w-100">
             <div class="w-100">
-                <p class="m-0 col">
-                    <strong class="text-danger">{{ target_coin.high_price }}
+                <p class="p-0 m-0 col">
+                    <strong class="text-danger">{{ target_coin.high_price|intcomma }}
                         <small>{{ target_coin.market|split:0 }}</small></strong>
                 </p>
                 <hr class="m-1">
-                <p class="m-0 col"
-                ><strong class="text-primary">{{ target_coin.low_price }}<small>
+                <p class="p-0 m-0 col"
+                ><strong class="text-primary">{{ target_coin.low_price|intcomma }}<small>
                     {{ target_coin.market|split:0 }}</small></strong>
                 </p>
             </div>
@@ -43,15 +45,15 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-2 align-self-center">
+    <div class="col-sm-3 align-self-center">
         <div class="row text-right w-100">
             <div class="w-100">
                 <p class="m-0 p-0 col">
-                    {{ target_coin.acc_trade_volume_24h }}<small>{{ target_coin.market|split:1 }}</small>
+                    {{ target_coin.acc_trade_volume_24h|intcomma }}<small>{{ target_coin.market|split:1 }}</small>
                 </p>
                 <hr class="m-1">
                 <p class="m-0 p-0 col">
-                    {{ target_coin.acc_trade_price_24h }}<small>{{ target_coin.market|split:0 }}</small>
+                    {{ target_coin.acc_trade_price_24h|intcomma }}<small>{{ target_coin.market|split:0 }}</small>
                 </p>
             </div>
         </div>

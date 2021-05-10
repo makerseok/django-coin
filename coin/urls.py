@@ -21,6 +21,6 @@ app_name = 'coin'
 urlpatterns = [
     path('', views.index, name='index'),
     path('<str:target>', views.detail, name='detail'),
-    path('twitter/<str:target>', views.twitter, name='twitter'),
     path('ajax/', views.get_by_ajax, name='get_by_ajax'),
+    # path('list/', views.refresh_list, name='refresh_list'),
 ]

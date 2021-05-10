@@ -1,15 +1,85 @@
 {% extends 'base.html' %}
 {% load filters %}
 {% block content %}
-<div class="container clearfix p-0">
-    <div class="d-inline-block mt-3 col-sm-9 float-left detail">
-        {% include 'coin/detail.html' %}
 
+<div class="container clearfix p-0">
+    <div class="d-inline-block mt-3 pl-0 col-sm-9 float-left detail">
+        {% include 'coin/detail.html' %}
     </div>
-    {% include 'coin/list.html' %}
-    <div style="height:200px;" class="twitter float-left">
-        {% include 'coin/twitter.html' %}
+    <div class="d-inline-block col-sm-3 mt-3 float-right p-0 min-vh-100 list">
+        {% include 'coin/list.html' %}
+    </div>
+    <div class="twitter col-sm-3 float-left mt-3 p-0">
+        {% include 'twitter/detail.html' %}
+    </div>
+    <div class="article float-left col-sm-6 mt-3">
+        {% include 'article/detail.html' %}
     </div>
 </div>
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+(function($) {
+    $.fn.setColor = function () {
+        $(".prices").each(function (index, item) {
+            if($(this).find(".change_price").text().replace(/,/g, "") >= 0) {
+                $(this).find(".updown").remove();
+                $(this).find("p:first").before("<p class='d-inline updown small'>▲</p>");
+                $(this).find("*").addClass("text-danger");
+            }
+            else {
+                $(this).find(".updown").remove();
+                $(this).find("p:first").before("<p class='d-inline updown small'>▼</p>");
+                $(this).find("*").addClass("text-primary");
+            }
+        })
+    };
+}(jQuery));
 
+$(document).ready(function(){
+    $(".coin_container:first").click();
+});
+/*
+function autoRefresh_div()
+{
+    var target_coin = $(".target").text();
+    $.ajax({
+        type: "POST",
+        url: "{% url 'coin:get_by_ajax' %}",
+        data: {
+            'target_coin': target_coin,
+            'csrfmiddlewaretoken': '{{ csrf_token }}'
+        },
+        success: function(data) {
+            $(".list").load("list");
+            $(".detail").load(data.target_coin).setColor();
+        },
+        error: function(request, status, error) {
+            console.log("실패");
+        }
+    });
+}
+setInterval('autoRefresh_div()', 5000);
+*/
+$(".coin_container").click(function() {
+    var target_coin = $(this).find("p:first").text();
+    $.ajax({
+        type: "POST",
+        url: "{% url 'coin:get_by_ajax' %}",
+        data: {
+            'target_coin': target_coin,
+            'csrfmiddlewaretoken': '{{ csrf_token }}'
+        },
+        success: function(data) {
+            //$(".list").load(".");
+            $(".detail").load(data.target_coin)
+            $(".twitter").load("../twitter/" + data.target_coin);
+            $(".article").load("../article/" + data.target_coin);
+        },
+        error: function(request, status, error) {
+            console.log("실패");
+        }
+    });
+})
+</script>
 {% endblock %}

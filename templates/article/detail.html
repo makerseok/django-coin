@@ -1,0 +1,17 @@
+{% load filters %}
+{% include 'clean_anchor.html' %}
+<div style="height:50px; line-height:50px;" class="text-white bg-secondary rounded-top pl-2">
+    <strong>Articles</strong>
+</div>
+<div class="border">
+    {% for article in articles %}
+    <div class="m-4 border-bottom">
+        <a class="lnk" href="{{ article|get_tuple_value:2 }}">
+            <strong>
+                {{ article|get_tuple_value:0 }}<br>
+            </strong>
+            <p class="pt-2">{{ article|get_tuple_value:1 }}</p>
+        </a>
+    </div>
+    {% endfor %}
+</div>

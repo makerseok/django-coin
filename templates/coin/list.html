@@ -1,69 +1,28 @@
 {% load filters %}
-<div class="d-inline-block col-sm-3 float-right p-0 h-100 list">
-    <table class="table">
-        <thead class="thead-light">
-        <tr>
-            <th colspan="2" scope="col">관심목록</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for coins in coin_data %}
-        {% for coin in coins %}
-        <tr class="coin_container">
-            <td scope="row p-0">
-                <h6 class="m-0 small"><strong>{{ coin.get_coin_name_display }}</strong></h6>
-                <p class="m-0 d-inline small">({{ coin.market }})</p>
-            </td>
-            <td class="prices">
-                <h5 class="mr-0 mb-0">{{ coin.trade_price }}<small>{{ coin.market|split:0 }}</small></h5>
-                <p class="mt-0 d-inline change_price small">{{ coin.signed_change_price }}</p>
-                <p class="mr-0 mt-0 d-inline small">{{ coin.signed_change_rate }}%</p>
-            </td>
-        </tr>
-        {% endfor %}
-        {% endfor %}
-        </tbody>
-    </table>
+{% load humanize %}
+
+<div style="height:50px; line-height:50px;" class="text-white bg-secondary rounded-top pl-2">
+    <strong>Coin List</strong>
 </div>
-{% block script %}
-<script type="text/javascript">
-(function($) {
-    $.fn.setColor = function () {
-        $(".prices").each(function (index, item) {
-            if($(this).find(".change_price").text() >= 0) {
-                $(this).find(".updown").remove();
-                $(this).find("p:first").before("<p class='d-inline updown small'>▲</p>");
-                $(this).find("*").addClass("text-danger");
-            }
-            else {
-                $(this).find(".updown").remove();
-                $(this).find("p:first").before("<p class='d-inline updown small'>▼</p>");
-                $(this).find("*").addClass("text-primary");
-            }
-        })
-    };
-}(jQuery));
-
-$(".coin_container").click(function() {
-    target_coin = $(this).find("p:first").text();
-    $.ajax({
-        type: "POST",
-        url: "{% url 'coin:get_by_ajax' %}",
-        data: {
-            'target_coin': target_coin,
-            'csrfmiddlewaretoken': '{{ csrf_token }}'
-        },
-        success: function(data) {
-            console.log("twitter/" + data.target_coin);
-            $(".detail").load(data.target_coin).setColor();
-            $(".twitter").load("twitter/" + data.target_coin).setColor();
-        },
-        error: function(request, status, error) {
-            console.log("실패");
-        }
-    });
-})
-
-
+<table class="table border m-0">
+    <tbody>
+    {% for coin in coin_data %}
+    <tr class="coin_container">
+        <td class="align-middle">
+            <h6 class="m-0 small"><strong>{{ coin.get_coin_name_display }}</strong></h6>
+            <p class="m-0 d-inline small">({{ coin.market }})</p>
+        </td>
+        <td class="prices text-right">
+            <h5 class="mr-0 mb-0">{{ coin.trade_price|intcomma }}<small>{{ coin.market|split:0 }}</small></h5>
+            <p class="mt-0 d-inline change_price small">{{ coin.signed_change_price|intcomma }}</p>
+            <p class="mr-0 mt-0 d-inline small">{{ coin.signed_change_rate }}%</p>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<script>
+$(document).ready(function(){
+    $(".list").setColor();
+});
 </script>
-{% endblock %}

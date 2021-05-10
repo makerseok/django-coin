@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load filters %}
+{% block content %}
+{% include 'clean_anchor.html' %}
+<div style="height:400px;" class="w-100 overflow-hidden image position-relative">
+    <img src="/static/main.png" class="w-100 wm-100 hm-100">
+    <div style="top:10px;left:10px;" class="position-absolute align-middle align-self-center w-100 h-100">
+        <a class="text-white lnk" href="{% url 'article:index' %}">
+            <h1 class="display-3 mt-5 ml-5">Hello Crypto!</h1></a>
+
+        <div class="float-left col-sm-7">
+            <div class="text-white p-4 float-left"><strong>오늘의 비트코인 용어</strong></div>
+            <div class="float-left border-left">
+                <p class="text-white pt-4 pl-3">{{ word|get_tuple_value:0 }}</p>
+                <p class="text-white pt-4 pl-3"><small>{{ word|get_tuple_value:1 }}</small></p>
+            </div>
+        </div>
+
+        <div class="float-right col-sm-4">
+            <a class="text-white float-right mr-5 border-bottom lnk"
+               href="{% url 'coin:index' %}"><h3 class="display-5">
+                DETAIL</h3></a>
+            <div class="clearfix"></div>
+            <a class="text-white float-right mr-5 lnk"
+               href="{% url 'twitter:index' %}"><h3 class="display-5 ">TWITTER</h3></a>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-4 clearfix">
+    <div class="col-sm-4 float-left">
+        <div class="m-4 text-right"><h2 class="display-3">coinness</h2></div>
+    </div>
+    <div class="col-sm-8 float-right">
+        <div class="border-left">
+            {% for article in coinness %}
+            {% if forloop.counter0 < 10 %}
+            <div class="m-4 border-bottom">
+                <a class="lnk" href="{{ article|get_tuple_value:2 }}">
+                    <strong>
+                        {{ article|get_tuple_value:0 }}<br>
+                    </strong>
+                    <p class="pt-2">{{ article|get_tuple_value:1 }}</p>
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="clearfix mb-5"></div>
+    <div class="col-sm-8 float-left">
+        <div class="float-right border-right">
+            {% for article in coindeskkorea %}
+            {% if forloop.counter0 < 10 %}
+            <div class="m-4 border-bottom">
+                <a class="lnk" href="{{ article|get_tuple_value:2 }}">
+                    <strong>
+                        {{ article|get_tuple_value:0 }}<br>
+                    </strong>
+                    <p class="pt-2">{{ article|get_tuple_value:1 }}</p>
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-sm-4 float-right">
+        <div class="m-4 text-right"><h2 class="display-3">coindesk</h2></div>
+    </div>
+    <div class="clearfix mb-5"></div>
+
+    <div class="col-sm-4 float-left">
+        <div class="m-4 text-right"><h2 class="display-3">tokenpost</h2></div>
+    </div>
+    <div class="col-sm-8 float-right">
+        <div class="border-left">
+            {% for article in tokenpost %}
+            {% if forloop.counter0 < 10 %}
+            <div class="m-4 border-bottom">
+                <a class="lnk" href="{{ article|get_tuple_value:2 }}">
+                    <strong>
+                        {{ article|get_tuple_value:0 }}<br>
+                    </strong>
+                    <p class="pt-2">{{ article|get_tuple_value:1 }}</p>
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

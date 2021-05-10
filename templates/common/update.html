@@ -42,15 +42,15 @@
                             KRW
                         </a>
                     </div>
-                    <div class="collapse" id="collapseKRW" data-parent="#accordion">
+                    <div class="collapse show" id="collapseKRW" data-parent="#accordion">
                         <div class="card-body p-0">
                             {% for name in NAMELIST_KRW %}
                             {% if forloop.counter0|remainder:10 == 0%}
                             <div class="btn-group btn-group-sm btn-group-toggle d-flex" data-toggle="buttons">
                                 {% endif %}
                                 <label style="width:auto;" class="btn btn-secondary text-white rounded-0">
-                                    <input type="checkbox" name="namelist" value="{{ name|tuple0 }}">
-                                    {{ name|tuple1 }}<br><small>{{ name|tuple0 }}</small>
+                                    <input type="checkbox" name="namelist" value="{{ name|get_tuple_value:0 }}">
+                                    {{ name|get_tuple_value:1 }}<br><small>{{ name|get_tuple_value:0 }}</small>
                                 </label>
                                 {% if forloop.counter0|remainder:10 == 9 or forloop.last %}
                             </div>
@@ -72,8 +72,8 @@
                             <div class="btn-group btn-group-sm btn-group-toggle d-flex" data-toggle="buttons">
                                 {% endif %}
                                 <label style="width:auto;" class="btn btn-secondary text-white rounded-0">
-                                    <input type="checkbox" name="namelist" value="{{ name|tuple0 }}">
-                                    {{ name|tuple1 }}<br><small>{{ name|tuple0 }}</small>
+                                    <input type="checkbox" name="namelist" value="{{ name|get_tuple_value:0 }}">
+                                    {{ name|get_tuple_value:1 }}<br><small>{{ name|get_tuple_value:0 }}</small>
                                 </label>
                                 {% if forloop.counter0|remainder:10 == 9 or forloop.last %}
                             </div>
@@ -95,8 +95,8 @@
                             <div class="btn-group btn-group-sm btn-group-toggle d-flex" data-toggle="buttons">
                                 {% endif %}
                                 <label style="width:auto;" class="btn btn-secondary text-white rounded-0">
-                                    <input type="checkbox" name="namelist" value="{{ name|tuple0 }}">
-                                    {{ name|tuple1 }}<br><small>{{ name|tuple0 }}</small>
+                                    <input type="checkbox" name="namelist" value="{{ name|get_tuple_value:0 }}">
+                                    {{ name|get_tuple_value:1 }}<br><small>{{ name|get_tuple_value:0 }}</small>
                                 </label>
                                 {% if forloop.counter0|remainder:10 == 9 or forloop.last %}
                             </div>
@@ -107,6 +107,36 @@
                 </div>
             </div>
         </div>
+        <div class="form-group">
+            <div id="accordion2">
+                <div class="card">
+                    <div class="card-header">
+                        <a class="card-link" data-toggle="collapse" href="#collapseTwit">
+                            Influencers
+                        </a>
+                    </div>
+
+                    <div class="collapse show" id="collapseTwit" data-parent="#accordion2">
+                        <div class="card-body p-0">
+                            {% for INFLUENCER in INFLUENCER_LIST %}
+                            {% if forloop.counter0|remainder:5 == 0%}
+                            <div class="btn-group btn-group-sm btn-group-toggle d-flex" data-toggle="buttons">
+                                {% endif %}
+                                <label style="width:auto;" class="btn btn-secondary text-white rounded-0">
+                                    <input type="checkbox" name="influencers"
+                                           value="{{ INFLUENCER }}">
+                                    {{ INFLUENCER }}
+                                </label>
+                                {% if forloop.counter0|remainder:5 == 4 or forloop.last %}
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <button type="submit" class="btn btn-primary">edit</button>
     </form>
 </div>
