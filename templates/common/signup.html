@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load filters %}
+{% block content %}
+<div class="container my-3">
+    <div class="row">
+        <div class="col-4">
+            <h4>signup</h4>
+        </div>
+        <div class="col-8 text-right">
+            <span> <a href="{% url 'common:login' %} ">login</a></span>
+        </div>
+    </div>
+
+    <form method="post" class="post-form">
+        {% csrf_token %}
+        {% include "form_errors.html" %}
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" name="username" id="username"
+                   value="{{ form.username.value|default_if_none:'' }}">
+        </div>
+        <div class="form-group">
+            <label for="password1">password</label>
+            <input type="password" class="form-control" name="password1" id="password1"
+                   value="{{ form.password1.value|default_if_none:'' }}">
+        </div>
+        <div class="form-group">
+            <label for="password2">confirm password</label>
+            <input type="password" class="form-control" name="password2" id="password2"
+                   value="{{ form.password2.value|default_if_none:'' }}">
+        </div>
+        <div class="form-group">
+            <label for="email">email</label>
+            <input type="email" class="form-control" name="email" id="email"
+                   value="{{ form.email.value|default_if_none:'' }}">
+        </div>
+        <div class="form-group">
+            <div id="accordion">
+                <div class="card">
+                    <div class="card-header">
+                        <a class="card-link" data-toggle="collapse" href="#collapseKRW">
+                            KRW
+                        </a>
+                    </div>
+                    <div class="collapse" id="collapseKRW" data-parent="#accordion">
+                        <div class="card-body p-0">
+                            {% for name in NAMELIST_KRW %}
+                            {% if forloop.counter0|remainder:10 == 0%}
+                            <div class="btn-group btn-group-sm btn-group-toggle d-flex" data-toggle="buttons">
+                                {% endif %}
+                                <label style="width:auto;" class="btn btn-secondary text-white rounded-0">
+                                    <input type="checkbox" name="namelist" value="{{ name|tuple0 }}">
+                                    {{ name|tuple1 }}<br><small>{{ name|tuple0 }}</small>
+                                </label>
+                                {% if forloop.counter0|remainder:10 == 9 or forloop.last %}
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <a class="card-link" data-toggle="collapse" href="#collapseBTC">
+                            BTC
+                        </a>
+                    </div>
+                    <div class="collapse" id="collapseBTC" data-parent="#accordion">
+                        <div class="card-body p-0">
+                            {% for name in NAMELIST_BTC %}
+                            {% if forloop.counter0|remainder:10 == 0%}
+                            <div class="btn-group btn-group-sm btn-group-toggle d-flex" data-toggle="buttons">
+                                {% endif %}
+                                <label style="width:auto;" class="btn btn-secondary text-white rounded-0">
+                                    <input type="checkbox" name="namelist" value="{{ name|tuple0 }}">
+                                    {{ name|tuple1 }}<br><small>{{ name|tuple0 }}</small>
+                                </label>
+                                {% if forloop.counter0|remainder:10 == 9 or forloop.last %}
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <a class="card-link" data-toggle="collapse" href="#collapseUSDT">
+                            USDT
+                        </a>
+                    </div>
+                    <div class="collapse" id="collapseUSDT" data-parent="#accordion">
+                        <div class="card-body p-0">
+                            {% for name in NAMELIST_USDT %}
+                            {% if forloop.counter0|remainder:10 == 0%}
+                            <div class="btn-group btn-group-sm btn-group-toggle d-flex" data-toggle="buttons">
+                                {% endif %}
+                                <label style="width:auto;" class="btn btn-secondary text-white rounded-0">
+                                    <input type="checkbox" name="namelist" value="{{ name|tuple0 }}">
+                                    {{ name|tuple1 }}<br><small>{{ name|tuple0 }}</small>
+                                </label>
+                                {% if forloop.counter0|remainder:10 == 9 or forloop.last %}
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">signup</button>
+    </form>
+</div>
+{% endblock %}

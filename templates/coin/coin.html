@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load filters %}
+{% block content %}
+<div class="container clearfix p-0">
+    <div class="d-inline-block mt-3 col-sm-9 float-left detail">
+        {% include 'coin/detail.html' %}
+
+    </div>
+    {% include 'coin/list.html' %}
+    <div style="height:200px;" class="twitter float-left">
+        {% include 'coin/twitter.html' %}
+    </div>
+</div>
+
+{% endblock %}
