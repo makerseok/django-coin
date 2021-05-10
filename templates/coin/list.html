@@ -1,12 +1,13 @@
 {% load filters %}
 {% load humanize %}
-
+<!--코인 리스트-->
 <div style="height:50px; line-height:50px;" class="text-white bg-secondary rounded-top pl-2">
     <strong>Coin List</strong>
 </div>
 <table class="table border m-0">
     <tbody>
     {% for coin in coin_data %}
+    <!--코인 리스트 항목-->
     <tr class="coin_container">
         <td class="align-middle">
             <h6 class="m-0 small"><strong>{{ coin.get_coin_name_display }}</strong></h6>
@@ -18,11 +19,14 @@
             <p class="mr-0 mt-0 d-inline small">{{ coin.signed_change_rate }}%</p>
         </td>
     </tr>
+    <!--코인 리스트 항목 끝-->
     {% endfor %}
     </tbody>
 </table>
+<!--코인 리스트 끝-->
 <script>
 $(document).ready(function(){
     $(".list").setColor();
 });
+
 </script>

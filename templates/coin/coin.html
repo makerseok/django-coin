@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load filters %}
 {% block content %}
-
+<!--detail 페이지 시작-->
 <div class="container clearfix p-0">
     <div class="d-inline-block mt-3 pl-0 col-sm-9 float-left detail">
         {% include 'coin/detail.html' %}
@@ -16,9 +16,11 @@
         {% include 'article/detail.html' %}
     </div>
 </div>
+<!--detail 페이지 끝-->
 {% endblock %}
 {% block script %}
 <script type="text/javascript">
+/* 등락에 따른 색 변경 함수 */
 (function($) {
     $.fn.setColor = function () {
         $(".prices").each(function (index, item) {
@@ -35,11 +37,11 @@
         })
     };
 }(jQuery));
-
+/* 최초 페이지 로드 완료 시 리스트 가장 위 코인 클릭 */
 $(document).ready(function(){
     $(".coin_container:first").click();
 });
-/*
+/* 못했음 ㅜㅜ
 function autoRefresh_div()
 {
     var target_coin = $(".target").text();
@@ -61,6 +63,7 @@ function autoRefresh_div()
 }
 setInterval('autoRefresh_div()', 5000);
 */
+/* detail 페이지에서 ajax 통신 */
 $(".coin_container").click(function() {
     var target_coin = $(this).find("p:first").text();
     $.ajax({
@@ -71,7 +74,8 @@ $(".coin_container").click(function() {
             'csrfmiddlewaretoken': '{{ csrf_token }}'
         },
         success: function(data) {
-            //$(".list").load(".");
+            //$(".list").load("."); 못했음 ㅜㅜ
+            /* 클릭 시 코인, 트위터, 기사 새로고침 */
             $(".detail").load(data.target_coin)
             $(".twitter").load("../twitter/" + data.target_coin);
             $(".article").load("../article/" + data.target_coin);

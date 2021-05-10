@@ -7,7 +7,7 @@
     <div style="top:10px;left:10px;" class="position-absolute align-middle align-self-center w-100 h-100">
         <a class="text-white lnk" href="{% url 'article:index' %}">
             <h1 class="display-3 mt-5 ml-5">Hello Crypto!</h1></a>
-
+        <!--비트코인 용어 출력-->
         <div class="float-left col-sm-7">
             <div class="text-white p-4 float-left"><strong>오늘의 비트코인 용어</strong></div>
             <div class="float-left border-left">
@@ -15,7 +15,7 @@
                 <p class="text-white pt-4 pl-3"><small>{{ word|get_tuple_value:1 }}</small></p>
             </div>
         </div>
-
+        <!--비트코인 용어 출력 끝-->
         <div class="float-right col-sm-4">
             <a class="text-white float-right mr-5 border-bottom lnk"
                href="{% url 'coin:index' %}"><h3 class="display-5">
@@ -28,6 +28,7 @@
 </div>
 
 <div class="container mt-4 clearfix">
+    <!--코인니스 기사 출력-->
     <div class="col-sm-4 float-left">
         <div class="m-4 text-right"><h2 class="display-3">coinness</h2></div>
     </div>
@@ -47,7 +48,9 @@
             {% endfor %}
         </div>
     </div>
+    <!--코인니스 기사 출력 끝-->
     <div class="clearfix mb-5"></div>
+    <!--코인데스크 기사 출력-->
     <div class="col-sm-8 float-left">
         <div class="float-right border-right">
             {% for article in coindeskkorea %}
@@ -67,8 +70,9 @@
     <div class="col-sm-4 float-right">
         <div class="m-4 text-right"><h2 class="display-3">coindesk</h2></div>
     </div>
+    <!--코인데스크 기사 출력 끝-->
     <div class="clearfix mb-5"></div>
-
+    <!--토큰포스트 기사 출력-->
     <div class="col-sm-4 float-left">
         <div class="m-4 text-right"><h2 class="display-3">tokenpost</h2></div>
     </div>
@@ -88,5 +92,6 @@
             {% endfor %}
         </div>
     </div>
+    <!--토큰포스트 기사 출력-->
 </div>
 {% endblock %}

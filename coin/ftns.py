@@ -7,6 +7,9 @@ influ = ['elonmusk', 'Kris_HK', 'cz_Binance', 'ki_young_ju',
 
 
 def namelist():
+    """
+    upbit api에서 암호화폐 리스트 받아옴
+    """
     url = "https://api.upbit.com/v1/market/all"
     querystring = {"isDetails": "false"}
     response = requests.request("GET", url, params=querystring).json()
@@ -15,6 +18,9 @@ def namelist():
 
 
 def namelist_eng():
+    """
+    upbit api에서 영어로 된 암호화폐 리스트 받아옴
+    """
     url = "https://api.upbit.com/v1/market/all"
     querystring = {"isDetails": "false"}
     response = requests.request("GET", url, params=querystring).json()
@@ -23,6 +29,9 @@ def namelist_eng():
 
 
 def namelist_split():
+    """
+    원화, BTC, USDT로 나눈 암호화폐 리스트를 받아옴 
+    """
     result = {
         'KRW': [],
         'BTC': [],
@@ -36,6 +45,9 @@ def namelist_split():
 
 
 def get_coin_list(string):
+    """
+    문자열에서 콤마로 나뉜 암호화폐들의 정보를 받아옴
+    """
     url = "https://api.upbit.com/v1/ticker"
     querystring = {"markets": string}
     response = requests.request("GET", url, params=querystring).json()
@@ -43,6 +55,9 @@ def get_coin_list(string):
 
 
 def update(response):
+    """
+    암호화폐와 트위터 리스트를 갱신함
+    """
     from .models import CoinData
     from twitter.models import Twitters
 

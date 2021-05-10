@@ -2,6 +2,9 @@ from django.db import models
 
 
 class Twitters(models.Model):
+    """
+    코인별 트위터 아이디 매핑해 저장
+    """
     coin_list = (
         ('ETH', 'ethereum'),
         ('BTC', 'Bitcoin'),

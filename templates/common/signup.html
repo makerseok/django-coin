@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load filters %}
 {% block content %}
+<!--회원가입 페이지-->
 <div class="container my-3">
     <div class="row">
         <div class="col-4">
@@ -34,6 +35,7 @@
             <input type="email" class="form-control" name="email" id="email"
                    value="{{ form.email.value|default_if_none:'' }}">
         </div>
+        <!--가상화폐 선택 리스트-->
         <div class="form-group">
             <div id="accordion">
                 <div class="card">
@@ -43,6 +45,7 @@
                         </a>
                     </div>
                     <div class="collapse show" id="collapseKRW" data-parent="#accordion">
+                        <!--KRW-가상화폐 항목-->
                         <div class="card-body p-0">
                             {% for name in NAMELIST_KRW %}
                             {% if forloop.counter0|remainder:10 == 0%}
@@ -57,6 +60,7 @@
                             {% endif %}
                             {% endfor %}
                         </div>
+                        <!--KRW-가상화폐 항목 끝-->
                     </div>
                 </div>
                 <div class="card">
@@ -66,6 +70,7 @@
                         </a>
                     </div>
                     <div class="collapse" id="collapseBTC" data-parent="#accordion">
+                        <!--BTC-가상화폐 항목-->
                         <div class="card-body p-0">
                             {% for name in NAMELIST_BTC %}
                             {% if forloop.counter0|remainder:10 == 0%}
@@ -80,6 +85,7 @@
                             {% endif %}
                             {% endfor %}
                         </div>
+                        <!--BTC-가상화폐 항목 끝-->
                     </div>
                 </div>
                 <div class="card">
@@ -89,6 +95,7 @@
                         </a>
                     </div>
                     <div class="collapse" id="collapseUSDT" data-parent="#accordion">
+                        <!--USDT-가상화폐 항목-->
                         <div class="card-body p-0">
                             {% for name in NAMELIST_USDT %}
                             {% if forloop.counter0|remainder:10 == 0%}
@@ -103,11 +110,14 @@
                             {% endif %}
                             {% endfor %}
                         </div>
+                        <!--USDT-가상화폐 항목 끝-->
                     </div>
                 </div>
             </div>
         </div>
-                <div class="form-group">
+        <!--가상화폐 선택 리스트 끝-->
+        <!--인플루언서 선택 리스트-->
+        <div class="form-group">
             <div id="accordion2">
                 <div class="card">
                     <div class="card-header">
@@ -136,7 +146,9 @@
                 </div>
             </div>
         </div>
+        <!--인플루언서 선택 리스트 끝-->
         <button type="submit" class="btn btn-primary">signup</button>
     </form>
 </div>
+<!--회원가입 페이지 끝-->
 {% endblock %}

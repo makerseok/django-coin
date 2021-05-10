@@ -8,6 +8,9 @@ from coin.models import CoinData
 
 
 def index(request):
+    """
+    3개 사이트에서 기사들을 크롤링해 article 페이지에 보여줌
+    """
     url = 'https://kr.coinness.com'
     html = requests.get(url).text
     bs = BeautifulSoup(html, 'html.parser')
@@ -70,6 +73,9 @@ def index(request):
 
 
 def get_news(request, target):
+    """
+    요청이 ajax일 경우 해당 암호화폐의 기사를 크롤링하고, 아닐 경우 리스트 맨 위 암호화폐의 기사 크롤링
+    """
     if request.is_ajax():
         target_name = CoinData.objects.get(coin_name=target).get_coin_name_display()
     else:

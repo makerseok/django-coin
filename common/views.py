@@ -1,12 +1,15 @@
-from coin.ftns import influ
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 
 from coin import ftns
+from coin.ftns import influ
 from .forms import UserForm, CustomUserupdateForm
 
 
 def signup(request):
+    """
+    폼 값에 오류가 없을 시 회원가입
+    """
     INFLUENCER_LIST = influ
     NAMELIST = ftns.namelist()
     namelist_dic = ftns.namelist_split()
@@ -40,6 +43,9 @@ def signup(request):
 
 
 def update(request):
+    """
+    폼 값에 오류가 없을 시 회원 정보 변경
+    """
     INFLUENCER_LIST = influ
     NAMELIST = ftns.namelist()
     namelist_dic = ftns.namelist_split()
@@ -58,7 +64,7 @@ def update(request):
             user.profile.influencers = ",".join(request.POST.getlist('influencers'))
             user.save()
             return redirect('coin:index')
-        
+
         else:
             if not request.POST.getlist('namelist'):
                 context['form'] = form
